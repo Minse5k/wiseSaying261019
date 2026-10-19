@@ -11,7 +11,11 @@ public class App {
 
         while (true) {
             System.out.print("명령) ");
-            String cmd = sc.nextLine().trim();
+
+            String[] parts = sc.nextLine().trim().split("\\?");
+
+            String cmd = parts[0];
+
             if (cmd.equals("종료")) {
                 break;
             }
@@ -23,7 +27,9 @@ public class App {
                     actionPrintList();
                     break;
                 case "삭제":
-                    actionDeleteList();
+                    int id = Integer.parseInt(parts[1].split("=")[1]);
+
+                    actionDeleteList(id);
                     break;
             }
         }
@@ -70,23 +76,28 @@ public class App {
         return result;
     }
 
-    void actionDeleteList() {
-        System.out.print("?id=");
-        int id = Integer.parseInt(sc.nextLine());
+    void actionDeleteList(int id) {
+        if(delete(id)) {
+            System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
+        } else {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+        }
 
-        delete(id);
-        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 
-    void delete(int id) {
+    boolean delete(int id) {
         int idx = -1;
         for(int i=0; i<wiseList.size(); i++) {
             if(wiseList.get(i).id == id) {
                 idx = i;
+                break;
             }
         }
         if(idx != -1) {
             wiseList.remove(idx);
+            return true;
         }
+
+        return false;
     }
 }
