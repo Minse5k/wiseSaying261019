@@ -22,6 +22,9 @@ public class App {
                 case "목록":
                     actionPrintList();
                     break;
+                case "삭제":
+                    actionDeleteList();
+                    break;
             }
         }
     }
@@ -65,5 +68,25 @@ public class App {
         }
 
         return result;
+    }
+
+    void actionDeleteList() {
+        System.out.print("?id=");
+        int id = Integer.parseInt(sc.nextLine());
+
+        delete(id);
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
+    }
+
+    void delete(int id) {
+        int idx = -1;
+        for(int i=0; i<wiseList.size(); i++) {
+            if(wiseList.get(i).id == id) {
+                idx = i;
+            }
+        }
+        if(idx != -1) {
+            wiseList.remove(idx);
+        }
     }
 }
