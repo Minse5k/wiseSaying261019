@@ -5,14 +5,23 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
 
-
-        while(true) {
+        while (true) {
             System.out.print("명령) ");
-            String cmd = sc.nextLine().trim();
 
-            if(cmd.equals("종료")) {
+            String cmd = sc.nextLine().trim();
+            if (cmd.equals("종료")) {
                 break;
             }
+
+            switch (cmd) {
+                case "등록":
+                    System.out.print("명언 : ");
+                    sc.nextLine();
+                    System.out.print("작가 : ");
+                    sc.nextLine();
+                    break;
+            }
         }
+
     }
 }
