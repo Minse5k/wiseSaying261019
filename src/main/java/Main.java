@@ -1,28 +1,7 @@
-import java.util.Scanner;
-
 public class Main {
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("== 명언 앱 ==");
-
-        while (true) {
-            System.out.print("명령) ");
-
-            String cmd = sc.nextLine().trim();
-            if (cmd.equals("종료")) {
-                break;
-            }
-
-            switch (cmd) {
-                case "등록":
-                    System.out.print("명언 : ");
-                    sc.nextLine();
-                    System.out.print("작가 : ");
-                    sc.nextLine();
-                    System.out.println("1번 명언이 등록되었습니다.");
-                    break;
-            }
-        }
-
+        App app = new App();
+        app.run();
     }
 }
