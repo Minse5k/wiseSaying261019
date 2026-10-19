@@ -31,6 +31,11 @@ public class App {
 
                     actionDeleteList(id);
                     break;
+                case "수정":
+                    id = Integer.parseInt(parts[1].split("=")[1]);
+
+                    actionEditList(id);
+                    break;
             }
         }
     }
@@ -86,18 +91,46 @@ public class App {
     }
 
     boolean delete(int id) {
-        int idx = -1;
-        for(int i=0; i<wiseList.size(); i++) {
-            if(wiseList.get(i).id == id) {
-                idx = i;
-                break;
-            }
-        }
+        int idx = findIndexById(id);
+
         if(idx != -1) {
             wiseList.remove(idx);
             return true;
         }
 
         return false;
+    }
+
+
+    void actionEditList(int id) {
+        int idx = findIndexById(id);
+
+        if(idx == -1) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+            return;
+        }
+        WiseSaying item = wiseList.get(idx);
+
+        System.out.printf("명언(기존) : %s\n", item.content);
+        System.out.print("명언 : ");
+        String content = sc.nextLine();
+        System.out.printf("작가(기존) : %s\n", item.author);
+        System.out.print("작가 : ");
+        String author = sc.nextLine();
+
+        edit(idx, new WiseSaying(id, author, content));
+    }
+
+    void edit(int idx, WiseSaying item) {
+        wiseList.set(idx, item);
+    }
+
+    int findIndexById(int id) {
+        for(int i=0; i<wiseList.size(); i++) {
+            if(wiseList.get(i).id == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
